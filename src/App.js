@@ -1,13 +1,25 @@
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import "./style.css";
+import api from "./services./api";
 
 function App() {
+  const [input, setInput] = useState("");
 
-  const[input, setInput] = useState('')
+  async function handleSerach() {
+    // 01310930/json/
 
-  function handleSerach(){
-    alert()
+    if (input == "") {
+      alert("Preencha corretamente");
+      return;
+    }
+
+    try {
+      const response = await api.get(`${input}/json`);
+      console.log(response)
+    } catch {
+      alert("Erro ao buscar")
+    }
   }
 
   return (
@@ -15,14 +27,16 @@ function App() {
       <h1 className="title">Buscador de CEP</h1>
 
       <div className="containerInput">
-        <input type="text" placeholder="Digite seu CEP..."
-        value={input}
-        onChange={(event) => setInput(event.target.value)}
+        <input
+          type="text"
+          placeholder="Digite seu CEP..."
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
         />
 
-        <button className="buttonSearch" onClick={handleSerach()}>
-        <FiSearch size={25} color="#fff" />
-        </button>  
+        <button className="buttonSearch" onClick={handleSerach}>
+          <FiSearch size={25} color="#fff" />
+        </button>
       </div>
 
       <main className="main">
