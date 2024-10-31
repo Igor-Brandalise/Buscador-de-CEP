@@ -1,16 +1,28 @@
+import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import "./style.css";
 
 function App() {
+
+  const[input, setInput] = useState('')
+
+  function handleSerach(){
+    alert()
+  }
+
   return (
     <div className="container">
       <h1 className="title">Buscador de CEP</h1>
 
       <div className="containerInput">
-        <input type="text" placeholder="Digite seu CEP..."></input>
+        <input type="text" placeholder="Digite seu CEP..."
+        value={input}
+        onChange={(event) => setInput(event.target.value)}
+        />
 
-        <button className="button"></button>
+        <button className="buttonSearch" onClick={handleSerach()}>
         <FiSearch size={25} color="#fff" />
+        </button>  
       </div>
 
       <main className="main">
