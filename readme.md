@@ -8,8 +8,8 @@ Este projeto foi feito com as tecnologias/bibliotecas:
 - React
 - JavaScript
 - React-icons
-- axios
-- viacep
+- Axios
+- Viacep
 - Git & Github
 
 <div id='deploy'></div>
