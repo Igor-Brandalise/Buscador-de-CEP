@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import "./style.css";
-import api from "./services./api";
+
+import api from "./services/api";
 
 function App() {
   const [input, setInput] = useState("");
+  const [cep, setCep] = useState({});
 
   async function handleSerach() {
     // 01310930/json/
@@ -16,9 +18,11 @@ function App() {
 
     try {
       const response = await api.get(`${input}/json`);
-      console.log(response)
+      setCep(response.data);
+      setInput("");
     } catch {
-      alert("Erro ao buscar")
+      alert("Erro ao buscar");
+      setInput("");
     }
   }
 
@@ -39,14 +43,18 @@ function App() {
         </button>
       </div>
 
-      <main className="main">
-        <h2>CEP:</h2>
+      {Object.keys(cep).length > 0 && (
+          <main className="main">
+          <h2>CEP: {cep.cep}</h2>
+  
+          <span>Rua: {cep.logradouro} </span>
+          <span>Complemento: {cep.complemento}</span>
+          <span>Bairro: {cep.bairro}</span>
+          <span>Localização: {cep.localidade} - {cep.uf}</span>
+        </main>
+      )}
 
-        <span>Rua:</span>
-        <span>Complemento:</span>
-        <span>Bairro:</span>
-        <span>Localização:</span>
-      </main>
+      
     </div>
   );
 }
